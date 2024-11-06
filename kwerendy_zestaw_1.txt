@@ -1,0 +1,44 @@
+zad.1
+tabelka byla robiona na zajeciach ale internet mi odłączono
+
+insert into postac values ('1', 'Bjorn','wiking', '444' , '24' );
+insert into postac values ('2', 'drozd','ptak', '454' , '14' );
+insert into postac values ('3', 'tesciowa','kobieta', '404' , '54' );        
+update postac set wiek=88 where id_postaci=3;
+
+
+zad.2 
+ CREATE TABLE walizka(id_walizki int AUTO_INCREMENT, pojemnosc tinyint UNSIGNED, kolor enum('rozowy','czerwony','teczowy','zolty'),id_wlascieiela int, PRIMARY KEY(id_walizki), foreign key (id_wlasciciela) references postac(id_postaci) on delete cascade);
+ALTER TABLE walizka MODIFY kolor ENUM('rozowy', 'czerwony', 'teczowy', 'zolty') NOT NULL DEFAULT 'rozowy';
+insert into walizka values (1,3, 'zolty',1), (2,5,'czerwony',2);
+
+zad.3
+ create table izba(adres_budynku varchar(50), nazwa_izby varchar(50), metraz int UNSIGNED, wlasciciel int, PRIMARY KEY (adres_budynku, nazwa_izby), foreign key (wlasciciel) references postac(id_postaci) on delete set null);
+ alter table izba add column kolor varchar(15) default 'czarny' after metraz;
+insert into izba (adres_budynku, nazwa_izby, metraz, kolor, wlasciciel) values('tuwima_11','spizarnia',35,'czarny',null);
+
+zad.4
+ create table przetwory (id_przetworu int auto_increment primary key, rok_produkcji int default 1654 , id_wykonawcy int, zawartosc varchar(100), dodatek varchar(100) default 'papryczka chilli',id_konsumenta int, foreign key (id_wykonawcy) references postac (id_postaci), foreign key (id_konsumenta) references postac(id_postaci));
+ insert into przetwory (zawartosc,dodatek) values ('bigos','papryczki chilli');
+
+
+zad.5
+ insert into postac(nazwa) values ('adam'),('michal'),('wiesiek'),('olaf'),('mati');
+
+create table statek(nazwa_statku varchar(20) primary key, rodzaj_statku enum ('motorowka','wikingow','parowy') not null, data_wodowania int unsigned, max_ladownosc int unsigned);
+ alter table statek modify column data_wodowania date;
+into statek (nazwa_statku, rodzaj_statku, data_wodowania, max_ladownosc) values ('statek1','motorowka','111-11-11',11),('statek2','wikingow','112-12-12',20);
+ 
+alter table postac add column funkcja varchar(20);
+ 
+update postac set funkcja= 'kapitan' where nazwa= 'bjorn';
+
+ alter table postac add column statek_nazwa varchar(20);
+ alter table postac add foreign key(statek_nazwa) references statek (nazwa_statku);
+
+update postac set statek_nazwa ='statek1' where nazwa in ('bjorn','drozd','tesciowa','adam');
+update postac set statek_nazwa ='statek2' where nazwa in ('michal','wiesiek','olaf','mati');
+
+ delete from izba where nazwa_izby= 'spizarnia';
+
+drop table izba;
