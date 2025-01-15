@@ -1,0 +1,19 @@
+select avg(waga) from kreatura where rodzaj="wiking";
+select avg(waga), count(rodzaj), rodzaj from kreatura group by rodzaj order by rodzaj;
+select rodzaj,avg(2024-year(dataUr)) from kreatura group by rodzaj;
+
+select sum(waga),rodzaj from zasob group by rodzaj order by rodzaj;
+select nazwa, avg(waga) from zasob where ilosc>= 4 group by nazwa having sum(waga)>10 ;
+select rodzaj, count(distinct nazwa) from zasob group by rodzaj having min(ilosc)>1;
+select k.nazwa, sum(z.ilosc) as ilosc_zasobow from kreatura k, ekwipunek e,zasob z where k.idKreatury and z.idZasobu group by k.nazwa;
+select k.nazwa, z.nazwa from kreatura k, ekwipunek e,zasob z where k.idKreatury = e.idKreatury and e.idZasobu = z.idZasobu;
+select k.nazwa from kreatura k left join ekwipunek e on k.idkreatury = e.idkreatury where e.idkreatury is null;
+SELECT k1.nazwa, k2.nazwa FROM kreatura k1, kreatura k2 WHERE ABS(k1.idKreatury - k2.idKreatury) = 5;
+select k.nazwa, z.nazwa from kreatura k, zasob z natural join ekwipunek where k.rodzaj = 'wiking' and year(dataUr)between 1670 and 1680;
+
+select k1.nazwa, k2.nazwa FROM kreatura k1, kreatura k2 WHERE ABS(k1.idKreatury - k2.idKreatury) = 5;
+select k.nazwa, z.nazwa from kreatura k inner join ekwipunek e on k.idkreatury=e.idkreatury inner join zasob z on e.idzasobu=z.idzasobu where k.rodzaj = 'wiking' and k.dataUr between "1670-01-01" and "1680-01-01";
+
+select k.nazwa from  kreatura k inner join ekwipunek e on k.idkreatury=e.idkreatury inner join zasob z on e.idzasobu=z.idzasobu where z.rodzaj='jedzenie'  order by k.dataUr ASC limit 5;
+
+select k1.nazwa as nazwa1, k2.nazwa as nazwa2 from kreatura k1 join kreatura k2 on k1.idkreatury=k2.idkreatury +5;

@@ -1,0 +1,20 @@
+
+CREATE TABLE postac (id_postaci int AUTO_INCREMENT, nazwa varchar(40), Rodzaj ENUM('wiking', 'ptak', 'kobieta'), Data_ur INT(4), Wiek TINYINT Unsigned, PRIMARY KEY (id_postaci));
+
+
+alter table postac add pesel varchar(11);
+ alter table postac modify column rodzaj enum('wiking','ptak','kobieta','syrena');
+ insert into postac (nazwa, rodzaj) values ('gertruda nieszczera','syrena');
+alter table walizka drop foreign key walizka_ibfk_1;
+alter table przetwory  drop foreign key przetwory_ibfk_1;
+ alter table przetwory  drop foreign key przetwory_ibfk_2;
+ alter table postac drop column id_postaci;
+ update postac set pesel=12345678912;
+alter table postac modify pesel varchar(11) not null;
+ update postac set pesel=12345678914 where nazwa='tesciowa';
+ update postac set pesel=12345678915 where nazwa='michal';
+ update postac set pesel=12345678916 where nazwa='olaf'
+ update postac set pesel=12345678917 where nazwa='mati';
+ update postac set pesel=12345678918 where nazwa='gertruda nieszczera';
+ alter table postac add primary key (pesel);
+ update postac set statek_nazwa= 'statek1'  where nazwa like '%a%'
